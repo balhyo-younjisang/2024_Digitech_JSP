@@ -1,5 +1,9 @@
+<%@page import="vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	MemberVO vo = (MemberVO) request.getAttribute("vo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,49 +71,49 @@ table td {
 		<div class="title_wrap">
 			<p class="title">홈쇼핑 회원 등록</p>
 		</div>
-		<form action="" method="POST">
+		<form action="JoinMemberCtrl" method="POST">
 			<table border="1">
 				<tr>
 					<td>
 						<p>회원번호(자동발생)</p>
 					</td>
-					<td><input value="" disabled></td>
+					<td><input value="<%=vo.getCustno() %>" disabled name="custno"></td>
 				</tr>
 				<tr>
 					<td>
 						<p>회원성명</p>
 					</td>
-					<td><input></td>
+					<td><input type="text" name="custname"></td>
 				</tr>
 				<tr>
 					<td>
 						<p>회원전화</p>
 					</td>
-					<td><input></td>
+					<td><input type="tel" name="phone" maxlength="13"></td>
 				</tr>
 				<tr>
 					<td>
 						<p>회원주소</p>
 					</td>
-					<td><input></td>
+					<td><input type="text" maxlength="60" name="address"></td>
 				</tr>
 				<tr>
 					<td>
 						<p>가입일자</p>
 					</td>
-					<td><input></td>
+					<td><input type="text" name="date"></td>
 				</tr>
 				<tr>
 					<td>
 						<p>고객등급(A:VIP,B:일반,C:직원)</p>
 					</td>
-					<td><input></td>
+					<td><input type="text" name="grade"></td>
 				</tr>
 				<tr>
 					<td>
 						<p>도시코드</p>
 					</td>
-					<td><input></td>
+					<td><input type="text" name="city"></td>
 				</tr>
 				<tr>
 					<td colspan="2">

@@ -20,12 +20,12 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>GetJoinMemberCtrl</display-name>
-    <servlet-name>GetJoinMemberCtrl</servlet-name>
-    <servlet-class>controller.GetJoinMemberCtrl</servlet-class>
+    <display-name>JoinMemberCtrl</display-name>
+    <servlet-name>JoinMemberCtrl</servlet-name>
+    <servlet-class>controller.JoinMemberCtrl</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetJoinMemberCtrl</servlet-name>
-    <url-pattern>/GetJoinMemberCtrl</url-pattern>
+    <servlet-name>JoinMemberCtrl</servlet-name>
+    <url-pattern>/JoinMemberCtrl</url-pattern>
   </servlet-mapping>
 </web-app>
