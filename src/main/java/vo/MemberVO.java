@@ -10,6 +10,7 @@ public class MemberVO {
 	private Date joindate;
 	private String grade;
 	private String city;
+	private int price;
 	
 	public int getCustno() {
 		return custno;
@@ -52,5 +53,11 @@ public class MemberVO {
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
 	}
 }

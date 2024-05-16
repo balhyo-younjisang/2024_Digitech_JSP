@@ -2,7 +2,7 @@ CREATE TABLE member_tbl_02
 (
 	custno number(6) primary key,
 	custname varchar2(20),
-	phone varchar2(13),
+	phone varchar2(1),
 	address varchar2(60),
 	joindate date,
 	grade char(1),
@@ -50,4 +50,14 @@ VALUES
 (100006, '차공단', '010-1111-7777', '제주도 제주시 감나무골', '20151211', 'C', '60');
 
 ------------------
-SELECT * FROM MEMBER_TBL_02;
+SELECT * FROM money_tbl_02;
+  
+SELECT CUSTNO, SUM(PRICE) AS PRICE FROM MONEY_TBL_02 GROUP BY CUSTNO
+
+SELECT A.CUSTNO, A.CUSTNAME, A.GRADE, B.PRICE 
+FROM MEMBER_TBL_02 A
+RIGHT OUTER JOIN (SELECT CUSTNO, SUM(PRICE) AS PRICE FROM MONEY_TBL_02 GROUP BY CUSTNO) B
+ON A.CUSTNO = B.CUSTNO ORDER BY B.PRICE DESC; 
+
+DELETE FROM MEMBER_TBL_02 WHERE CUSTNAME = '김지상';
+

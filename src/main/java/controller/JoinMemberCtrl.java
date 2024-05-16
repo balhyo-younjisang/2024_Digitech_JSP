@@ -64,8 +64,7 @@ public class JoinMemberCtrl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String custno = request.getParameter("custno");
+		// TODO Auto-generated method stub 	
 		String custname = request.getParameter("custname");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
@@ -79,15 +78,14 @@ public class JoinMemberCtrl extends HttpServlet {
 		if(city.length() != 2) alertMsg = "도시코드가 올바르게 입력되지 않았습니다.";
 		// 회원등급 유효성 검사
 		if(grade.length() != 1 || !(grade.equals("A") || grade.equals("B") || grade.equals("C"))) alertMsg = "회원등급이 올바르게 입력되지 않았습니다";
-		
+		// 날짜 유효성 검사
+		alertMsg = isValid(date, 8, -1, "가입일자");
 		// 주소 유효성 검사
 		alertMsg = isValid(address, -1, 60, "회원주소");
 		// 전화번호 유효성 검사
 		alertMsg = isValid(phone, 13, -1, "회원전화");
 		// 이름 유효성 검사
 		alertMsg = isValid(custname, -1, 20, "회원성명");
-		// 날짜 유효성 검사
-		alertMsg = isValid(date, 8, -1, "가입일자");
 		
 		if(alertMsg == null) {
 			Connection conn = null;
@@ -114,8 +112,6 @@ public class JoinMemberCtrl extends HttpServlet {
 				DBConnection.close(stmt, conn);
 			}
 		}
-		
-		System.out.println(alertMsg);
 		
 		request.setAttribute("alert", alertMsg);
 		request.getRequestDispatcher("join.jsp").forward(request, response);

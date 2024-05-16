@@ -28,4 +28,34 @@
     <servlet-name>JoinMemberCtrl</servlet-name>
     <url-pattern>/JoinMemberCtrl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetMemberCtrl</display-name>
+    <servlet-name>GetMemberCtrl</servlet-name>
+    <servlet-class>controller.GetMemberCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMemberCtrl</servlet-name>
+    <url-pattern>/GetMemberCtrl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetMemberCostCtrl</display-name>
+    <servlet-name>GetMemberCostCtrl</servlet-name>
+    <servlet-class>controller.GetMemberCostCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMemberCostCtrl</servlet-name>
+    <url-pattern>/GetMemberCostCtrl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditMemberCtrl</display-name>
+    <servlet-name>EditMemberCtrl</servlet-name>
+    <servlet-class>controller.EditMemberCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditMemberCtrl</servlet-name>
+    <url-pattern>/EditMemberCtrl</url-pattern>
+  </servlet-mapping>
 </web-app>

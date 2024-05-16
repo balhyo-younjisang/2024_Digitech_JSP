@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	MemberVO vo = (MemberVO) request.getAttribute("vo");
+MemberVO vo = (MemberVO) request.getAttribute("vo");
+String alert = (String) request.getAttribute("alert");
 %>
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,7 @@ ul, li {
 
 section {
 	width: 100%;
-	height: calc(100% - 180px);	
+	height: calc(100% - 180px);
 }
 
 .title_wrap {
@@ -46,8 +47,8 @@ section {
 
 form {
 	display: flex;
-	align-items:center;
-	justify-content:center;
+	align-items: center;
+	justify-content: center;
 }
 
 table {
@@ -64,7 +65,16 @@ table td {
 </style>
 </head>
 <body>
-
+	<%
+	if (alert != null) {
+	%>
+	<script>
+		alert("<%=alert%>
+		");
+	</script>
+	<%
+	}
+	%>
 	<%@ include file="header.jsp"%>
 	<%@ include file="nav.jsp"%>
 	<section>
@@ -77,7 +87,8 @@ table td {
 					<td>
 						<p>회원번호(자동발생)</p>
 					</td>
-					<td><input value="<%=vo.getCustno() %>" disabled name="custno"></td>
+					<td><input value="<%=vo != null ? vo.getCustno() : ""%>"
+						disabled name="custno"></td>
 				</tr>
 				<tr>
 					<td>
@@ -89,7 +100,8 @@ table td {
 					<td>
 						<p>회원전화</p>
 					</td>
-					<td><input type="tel" name="phone" maxlength="13"></td>
+					<td><input type="tel" name="phone" maxlength="13" id="phone">
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -118,12 +130,69 @@ table td {
 				<tr>
 					<td colspan="2">
 						<button type="submit">등록</button>
-						<button>조회</button>
+						<button>
+							<a href="GetMemberCtrl">조회</a>
+						</button>
 					</td>
 				</tr>
 			</table>
 		</form>
 	</section>
 	<%@ include file="footer.jsp"%>
+	<script>
+    window.onload = () => document.getElementById("phone").addEventListener("keyup", function (event) {
+      inputPhoneNumber(event.target);
+    });
+
+    function inputPhoneNumber(phone) {
+    if(phone.value.length > 13) return;
+
+      if (event.keyCode != 8) {
+        const regExp = new RegExp(/^[0-9]{2,3}-^[0-9]{3,4}-^[0-9]{4}/g);
+        if (phone.value.replace(regExp, "").length != 0) {
+          if (checkPhoneNumber(phone.value) == true) {
+            let number = phone.value.replace(/[^0-9]/g, "");
+            let tel = "";
+            let seoul = 0;
+            if (number.substring(0, 2).indexOf("02") == 0) {
+              seoul = 1;
+              phone.setAttribute("maxlength", "12");
+              console.log(phone);
+            } else {
+              phone.setAttribute("maxlength", "13");
+            }
+            if (number.length < (4 - seoul)) {
+              return number;
+            } else if (number.length < (7 - seoul)) {
+              tel += number.substr(0, (3 - seoul));
+              tel += "-";
+              tel += number.substr(3 - seoul);
+            } else if (number.length < (11 - seoul)) {
+              tel += number.substr(0, (3 - seoul));
+              tel += "-";
+              tel += number.substr((3 - seoul), 3);
+              tel += "-";
+              tel += number.substr(6 - seoul);
+            } else {
+              tel += number.substr(0, (3 - seoul));
+              tel += "-";
+              tel += number.substr((3 - seoul), 4);
+              tel += "-";
+              tel += number.substr(7 - seoul);
+            }
+            phone.value = tel;
+          } else {
+            const regExp = new RegExp(/[^0-9|^-]$/);
+          }
+        }
+      }
+    }
+
+    function checkPhoneNumber(number) {
+      const regExp = new RegExp(/^[0-9|-]$/);
+      if (regExp.test(number) == true) {return true;}
+      else {return false;}
+    }
+  </script>
 </body>
 </html>
